@@ -4,12 +4,12 @@ struct PhotosPermission {
     
     @MainActor
     static func request(completion: @escaping (PermissionStatus) -> Void) {
-        let status = PHPhotoLibrary.authorizationStatus()
+        let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
         switch status {
         case .authorized, .limited: completion(.authorized)
         case .denied, .restricted: completion(.denied)
         case .notDetermined:
-            PHPhotoLibrary.requestAuthorization { newStatus in
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { newStatus in
                 switch newStatus {
                 case .authorized, .limited: completion(.authorized)
                 case .denied, .restricted: completion(.denied)
@@ -23,7 +23,7 @@ struct PhotosPermission {
     }
     
     static func status() -> PermissionStatus {
-        switch PHPhotoLibrary.authorizationStatus() {
+        switch PHPhotoLibrary.authorizationStatus(for: .readWrite) {
         case .authorized, .limited: return .authorized
         case .denied, .restricted: return .denied
         case .notDetermined: return .notDetermined

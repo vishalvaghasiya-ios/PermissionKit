@@ -49,13 +49,31 @@ final class PermissionManager: NSObject {
             MotionPermission.request(motionManager: motionManager, completion: completion)
         case .tracking:
             TrackingPermission.request(completion: completion)
+        case .notifications:
+            NotificationPermission.request(completion: completion)
+        case .microphone:
+            MicrophonePermission.request(completion: completion)
+        case .contacts:
+            ContactsPermission.request(completion: completion)
+        case .calendar:
+            CalendarPermission.request(completion: completion)
+        case .reminders:
+            RemindersPermission.request(completion: completion)
+        case .speech:
+            SpeechPermission.request(completion: completion)
+        case .screenRecording:
+            ScreenRecordingPermission.request(completion: completion)
+        case .health:
+            HealthPermission.request(completion: completion)
+        case .mediaLibrary:
+            MediaLibraryPermission.request(completion: completion)
         // TODO: Add other permissions similarly
         default:
             completion(.notDetermined)
         }
     }
     
-    func status(permission: AppPermission) -> PermissionStatus {
+    @MainActor func status(permission: AppPermission) -> PermissionStatus {
         switch permission {
         case .camera:
             return CameraPermission.status()
@@ -69,6 +87,24 @@ final class PermissionManager: NSObject {
             return MotionPermission.status()
         case .tracking:
             return TrackingPermission.status()
+        case .notifications:
+            return NotificationPermission.status()
+        case .microphone:
+            return MicrophonePermission.status()
+        case .contacts:
+            return ContactsPermission.status()
+        case .calendar:
+            return CalendarPermission.status()
+        case .reminders:
+            return RemindersPermission.status()
+        case .speech:
+            return SpeechPermission.status()
+        case .screenRecording:
+            return ScreenRecordingPermission.status()
+        case .health:
+            return HealthPermission.status()
+        case .mediaLibrary:
+            return MediaLibraryPermission.status()
         default:
             return .notDetermined
         }

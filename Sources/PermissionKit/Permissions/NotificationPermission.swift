@@ -1,6 +1,6 @@
 import UserNotifications
 
-struct NotificationsPermission {
+struct NotificationPermission {
     
     @MainActor
     static func request(completion: @escaping (PermissionStatus) -> Void) {
